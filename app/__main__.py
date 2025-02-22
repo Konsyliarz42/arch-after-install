@@ -18,7 +18,6 @@ def get_packages() -> dict[str, Package]:
     pkgs["openssh"] = packages.PackageOpenssh.install_ask()
     pkgs["xorg"] = packages.PackageXorg.install_ask()
     pkgs["fonts"] = packages.PackageFonts.install_ask()
-    pkgs["nano"] = packages.PackageNano.install_ask()
 
     pkgs["gnome"] = packages.PackageGnome.install_ask()
     if pkgs.get("gnome") and not pkgs.get("network_manager"):
@@ -48,6 +47,7 @@ def get_packages() -> dict[str, Package]:
 
     pkgs["bash"] = packages.PackageBash.install_ask()
     pkgs["zsh"] = packages.PackageZsh.install_ask()
+    pkgs["nano"] = packages.PackageNano.install_ask()
 
     return pkgs
 
@@ -74,7 +74,9 @@ def main() -> ExitCode:
         exit_code = pkg.install(password)
         if exit_code != ExitCode.SUCCESS:
             return exit_code
-        console.log("Finished")
+        console.log("Finished", style="bold bright_green")
+
+    console.print("\n==== All packages installed ====", style="bold green")
 
     return ExitCode.SUCCESS
 
