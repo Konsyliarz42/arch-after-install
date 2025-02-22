@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Update AUR package
+# > You have to be inside the repository!
+aur-update() {(
+    set -e
+
+    git fetch
+
+    local commits="$(git log ..origin/master --oneline | wc -l)"
+
+    if [ ${commits} -ne 0 ]; then
+        git restore .
+        git pull
+        makepkg -si
+    else
+        echo "Package is already up to date"
+        exit 1
+    fi
+)}
+
+# Update Visual Studio Code from anywhere
+code-update() {(
+    set -e
+
+    cd $AUR_DIR/visual-studio-code-bin
+    aur-update
+)}
+
+# Connect with Windows partition
+windows-connect() {(
+    set -e
+
+    sudo mkdir -p /run/media/alfarius/Windows
+    sudo mount -t ntfs /dev/nvme0n1p3 /run/media/alfarius/Windows
+)}
