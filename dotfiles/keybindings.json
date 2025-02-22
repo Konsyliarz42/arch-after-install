@@ -1,0 +1,27 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "alt+c",
+        "command": "editor.action.transformToCamelcase"
+    },
+    {
+        "key": "alt+k",
+        "command": "editor.action.transformToKebabcase"
+    },
+    {
+        "key": "alt+l",
+        "command": "editor.action.transformToLowercase"
+    },
+    {
+        "key": "alt+s",
+        "command": "editor.action.transformToSnakecase"
+    },
+    {
+        "key": "alt+t",
+        "command": "editor.action.transformToTitlecase"
+    },
+    {
+        "key": "alt+u",
+        "command": "editor.action.transformToUppercase"
+    }
+]

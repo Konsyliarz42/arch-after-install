@@ -1,0 +1,15 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias zerotier='sudo zerotier-cli'
+alias activate="source ./.venv/bin/activate"
+
+PS1='\n\e[1;34m\w\e[0m\n\u@\h \e[1;35m>\e[0m '
+
+fastfetch
