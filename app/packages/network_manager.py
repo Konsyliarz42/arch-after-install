@@ -6,7 +6,7 @@ from ..package import Package
 
 
 class PackageNetworkManager(Package):
-    NAME = "Network Manager"
+    NAME = "NetworkManager"
 
     @classmethod
     def install_ask(cls) -> Optional["PackageNetworkManager"]:

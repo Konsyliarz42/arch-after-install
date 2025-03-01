@@ -8,7 +8,7 @@ from ..package import Command, Package
 
 
 class PackageWireguard(Package):
-    NAME = "Wireguard"
+    NAME = "WireGuard"
 
     @classmethod
     def install_ask(cls) -> Optional["PackageWireguard"]:
@@ -27,10 +27,16 @@ class PackageWireguard(Package):
         if exit_code != ExitCode.SUCCESS:
             return exit_code
 
+        if not self.config_path:
+            return ExitCode.SUCCESS
+
         with console.status("Connect with VPN"):
             exit_code = self.run_bash(
-                Command(f"nmcli connection import type wireguard file {self.config_path}")
+                self.stdout_path,
+                Command(f"nmcli connection import type wireguard file {self.config_path}"),
             )
+            if exit_code != ExitCode.SUCCESS:
+                return exit_code
         console.log("VPN connected", style="green")
 
-        return exit_code
+        return ExitCode.SUCCESS

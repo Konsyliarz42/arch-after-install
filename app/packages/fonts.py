@@ -17,5 +17,6 @@ class PackageFonts(Package):
             pacman_pkgs=(
                 "noto-fonts",
                 "noto-fonts-emoji",
+                "adobe-source-code-pro-fonts"
             ),
         )

@@ -36,4 +36,4 @@ class PackageDocker(Package):
                 return exit_code
         console.log("User added to docker group", style="green")
 
-        return self.enable_daemon(password)
+        return self.enable_daemon(self.daemons[0], password)

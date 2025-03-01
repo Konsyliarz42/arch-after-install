@@ -2,6 +2,22 @@
 
 This repository contains my dotfiles with program to automatic install and apply my configuration.
 
+## Available options
+
+- **WiFi RTL88x2BU driver** - Drivers for my network adapter.
+- **NetworkManager** - Standard Linux network configuration tool suite.
+- **OpenSSH server** - Premier connectivity tool for remote login with the SSH protocol.
+- **X.Org** - Project provides an open source implementation of the X Window System.
+- **Fonts** - Fonts used by me.
+- **GNOME environment** - Graphical user environment based on GTK+ and GDK widgets. It runs on most Unix-type systems.
+- **VS Code** - Integrated development environment developed by Microsoft.
+- **Docker** - Open-source containerisation software, acting as a ‘platform for developers and administrators to create, deploy and run distributed applications.
+- **WireGuard** - Extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography.
+- **ZeroTier One** - Secure network overlay that allows you to manage all of your network resources as if they were on the same LAN.'
+- **bash** - Load my configuration.
+- **zsh** - Install and reconfigure zsh.
+- **nano** - Load my configuration.
+
 ## Pre requirements
 
 - Arch linux _(if you use [archinstall](https://wiki.archlinux.org/title/Archinstall) use minimal profile)_

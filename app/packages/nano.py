@@ -32,6 +32,11 @@ class PackageNano(Package):
         with console.status("Applying configuration"):
             src_file = DOTFILES_PATH.joinpath("nanorc")
             dest_file = HOME_PATH.joinpath(".config", "nano", "nanorc")
+
+            if not dest_file.exists():
+                dest_file.parent.mkdir(parents=True)
+                dest_file.touch()
+
             shutil.copy(src_file, dest_file)
         console.log("Config file applied", style="green")
 

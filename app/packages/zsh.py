@@ -30,7 +30,7 @@ class PackageZsh(Package):
                 "zsh-autosuggestions",
                 "zsh-syntax-highlighting",
             ),
-            aur_urls=("git clone https://aur.archlinux.org/zsh-pure-prompt.git",),
+            aur_urls=("https://aur.archlinux.org/zsh-pure-prompt.git",),
         )
 
     def install(self, password: str) -> ExitCode:
@@ -40,9 +40,10 @@ class PackageZsh(Package):
 
         with console.status("Installing external packages"):
             exit_code = self.run_bash(
+                self.stdout_path,
                 Command(
-                    'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended'
-                )
+                    'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
+                ),
             )
             if exit_code != ExitCode.SUCCESS:
                 return exit_code
@@ -59,7 +60,9 @@ class PackageZsh(Package):
             shutil.copy(src_file, dest_file)
 
             if self.default_shell:
-                exit_code = self.run_bash(Command(f"chsh -s /bin/zsh {getpass.getuser()}", password))
+                exit_code = self.run_bash(
+                    self.stdout_path, Command(f"chsh -s /bin/zsh {getpass.getuser()}", password)
+                )
                 if exit_code != ExitCode.SUCCESS:
                     return exit_code
         console.log("Config file applied", style="green")

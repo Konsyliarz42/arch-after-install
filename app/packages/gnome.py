@@ -6,11 +6,11 @@ from ..package import Command, Package
 
 
 class PackageGnome(Package):
-    NAME = "Gnome"
+    NAME = "GNOME environment"
 
     @classmethod
     def install_ask(cls) -> Optional["PackageGnome"]:
-        if cls._install_ask(f"Install {cls.NAME} environment:"):
+        if cls._install_ask(f"Install {cls.NAME}:"):
             return PackageGnome()
 
     def __init__(self) -> None:
@@ -33,8 +33,7 @@ class PackageGnome(Package):
                 "gnome-terminal",
                 "gnome-tweaks",
                 "nautilus",
-                "resources"
-                "xdg-user-dirs",
+                "resourcesxdg-user-dirs",
                 "xdg-user-dirs-gtk",
             ),
             aur_urls=(
@@ -51,7 +50,8 @@ class PackageGnome(Package):
 
         with console.status("Applying configuration"):
             exit_code = self.run_bash(
-                Command("timedatectl set-local-rtc 1 --adjust-system-clock", password)
+                self.stdout_path,
+                Command("timedatectl set-local-rtc 1 --adjust-system-clock", password),
             )
             if exit_code != ExitCode.SUCCESS:
                 return exit_code

@@ -16,7 +16,7 @@ class PackageZerotier(Package):
             return PackageZerotier()
 
     def __init__(self) -> None:
-        self.network = questionary.text("Network ID:", qmark="  -").ask()
+        self.network = questionary.text("Network ID:", qmark="  -").unsafe_ask()
         super().__init__(
             name=self.NAME,
             pacman_pkgs=("zerotier-one",),
@@ -32,8 +32,13 @@ class PackageZerotier(Package):
         if exit_code != ExitCode.SUCCESS:
             return exit_code
 
-        with console.status("Connect with VPN"):
-            exit_code = self.run_bash(Command(f"zerotier-cli join {self.network}", password))
+        if not self.network:
+            return ExitCode.SUCCESS
+
+        with console.status(f"Connect with VPN network: {self.network}"):
+            exit_code = self.run_bash(
+                self.stdout_path, Command(f"zerotier-cli join {self.network}", password)
+            )
             if exit_code != ExitCode.SUCCESS:
                 return exit_code
         console.log("VPN connected", style="green")
